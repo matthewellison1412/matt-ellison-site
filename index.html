@@ -60,14 +60,15 @@
   }
   .name{
     font-weight:400;
-    font-size:clamp(2.6rem,7.5vw,4.25rem);
-    line-height:1.04;
-    letter-spacing:-0.022em;
-    margin:0 0 2rem;
+    font-size:clamp(2rem,4.5vw,2.75rem);
+    line-height:1.1;
+    letter-spacing:-0.016em;
+    margin:0 0 2.75rem;
   }
 
-  /* ---------- bio ---------- */
+  /* ---------- bio (hidden unless written) ---------- */
   .bio{max-width:var(--measure);}
+  .bio:empty{display:none;}
   .bio p{margin:0 0 1.15rem;}
   .bio p:last-child{margin-bottom:0;}
 
@@ -75,9 +76,10 @@
   .rule{
     border:0;
     border-top:1px solid var(--rule);
-    margin:3.5rem 0 2.25rem;
+    margin:0 0 2rem;
     max-width:var(--measure);
   }
+  .bio:not(:empty) ~ .rule{margin-top:3.25rem;}
 
   /* ---------- archive ---------- */
   .archive-heading{
@@ -191,9 +193,7 @@
   <p class="tagline" id="tagline">markets, models, and the math underneath</p>
   <h1 class="name" id="name">Hi, I'm Matt.</h1>
 
-  <div class="bio" id="bio">
-    <p>I work in finance across FP&amp;A, M&amp;A, and investment management, with a focus on macroeconomic structure.</p>
-  </div>
+  <div class="bio" id="bio"></div>
 
   <div id="sections"></div>
 

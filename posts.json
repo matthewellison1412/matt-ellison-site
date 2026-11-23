@@ -4,11 +4,31 @@
       "title": "Why breakeven churn moves",
       "date": "2026-11-23",
       "category": "Note",
-      "summary": "A subscriber base can shrink while churn barely changes. The threshold that decides it isn't fixed \u2014 and when marketing spend falls, it drops to meet you.",
+      "summary": "A subscriber base can shrink while churn barely changes. The threshold that decides it isn't fixed.",
       "image": "",
       "link": "",
       "slug": "",
-      "body": "Breakeven churn is the rate where new subscribers exactly replace lost ones. It's one division: **monthly gross adds \u00f7 the subscriber base**. Above that line the base shrinks, below it the base grows.\n\nThe mistake is treating it as a fixed target. It isn't. It moves whenever either input moves, and the input that moves fastest is usually gross adds.\n\n## What that looks like\n\nTake a prepaid carrier adding about 215,000 subscribers a month against a 7.2 million base. Breakeven sits at 3.00%, so churn in the high 2s is fine and the base grows.\n\nNow cut marketing spend. Gross adds fall to 187,000 a month, the base is roughly 7.4 million, and breakeven drops to 2.51%.\n\n| Period | Gross adds | Base | Breakeven | Actual churn |\n|---|---|---|---|---|\n| First half | 215K | 7.2M | 3.00% | 2.75% |\n| Second half | 187K | 7.4M | 2.51% | 2.82% |\n\nChurn rose 7 basis points. The threshold fell 48. They crossed, and net adds went negative.\n\n## Why it matters\n\nRead only the churn rate and you'd conclude almost nothing changed \u2014 2.75% to 2.82% is noise. The damage came from the other side of the equation entirely, and the churn number can't show it to you.\n\n> A retention problem and an acquisition problem produce the same headline. They need different fixes.\n\nThe practical version: track the threshold alongside the rate. One number without the other is half the picture."
+      "body": "Breakeven churn is the rate where new subscribers exactly replace lost ones. It's one division: **monthly gross adds ÷ the subscriber base**. Above that line the base shrinks, below it the base grows.\n\nThe mistake is treating it as a fixed target. It moves whenever either input moves, and the input that moves fastest is usually gross adds.\n\n## What that looks like\n\nTake a prepaid carrier adding about 215,000 subscribers a month against a 7.2 million base. Breakeven sits at 3.00%, so churn in the high 2s is fine and the base grows.\n\nNow cut marketing spend. Gross adds fall to 187,000 a month, the base is roughly 7.4 million, and breakeven drops to 2.51%.\n\n| Period | Gross adds | Base | Breakeven | Actual churn |\n|---|---|---|---|---|\n| First half | 215K | 7.2M | 3.00% | 2.75% |\n| Second half | 187K | 7.4M | 2.51% | 2.82% |\n\nChurn rose 7 basis points. The threshold fell 48. They crossed, and net adds went negative.\n\n## Why it matters\n\nRead only the churn rate and you'd conclude almost nothing changed. The damage came from the other side of the equation, and the churn number can't show it to you.\n\n> A retention problem and an acquisition problem produce the same headline. They need different fixes."
+    },
+    {
+      "title": "Two CAC rules that are the same rule",
+      "date": "2026-11-10",
+      "category": "Note",
+      "summary": "Payback under a third of tenure, and LTV:CAC above 3:1. These get quoted as separate tests. They can't disagree.",
+      "image": "",
+      "link": "",
+      "slug": "",
+      "body": "Two acquisition tests get quoted as if they're independent checks:\n\n- Payback period under a third of average tenure\n- LTV:CAC above 3:1\n\nThey're the same test. If payback is T/3, then CAC = m × T/3, where m is monthly contribution margin. LTV is m × T. So LTV ÷ CAC = (m × T) ÷ (m × T/3) = **exactly 3**.\n\nPassing one always means passing the other. Quoting both doesn't add rigor.\n\n## The part that does matter\n\nThe ceiling isn't fixed, because tenure isn't fixed. Tenure is 1 ÷ churn, so when churn rises, the maximum defensible CAC falls with it.\n\n| Churn | Tenure | LTV | CAC ceiling |\n|---|---|---|---|\n| 2.00% | 50 mo | $965 | $322 |\n| 2.51% | 40 mo | $769 | $256 |\n| 2.88% | 35 mo | $670 | $223 |\n| 3.20% | 31 mo | $603 | $201 |\n\nSpend to the ceiling at today's churn, then watch churn drift up, and you've bought subscribers at a price that only worked under the old rate.\n\nSo the sequencing writes itself: fix retention first, and the ceiling lifts on its own."
+    },
+    {
+      "title": "The installed base is the asset",
+      "date": "2026-10-28",
+      "category": "Note",
+      "summary": "When hardware acquisition is effectively free, the growth question stops being how many devices you sell.",
+      "image": "",
+      "link": "",
+      "slug": "",
+      "body": "Most subscriber models start with acquisition cost. For a company where brand pull does the acquiring, that line is close to zero and the model has to start somewhere else.\n\nIf a device sells at a margin that covers itself immediately, the hardware isn't the investment. It's the entry point. What compounds afterward is whatever recurring revenue attaches to that device over its life.\n\n## Rough shape of it\n\nAssume a four-year replacement cycle and services revenue somewhere near $85–95 per device per year — derived by dividing total services revenue by the installed base, which is a crude estimate rather than a disclosed figure.\n\nThat puts services lifetime value around **$340–380 per device**, sitting on top of a hardware margin already captured at the point of sale.\n\n## What follows\n\nWith billions of devices already in circulation, incremental growth from selling the next unit is small next to growth from raising attach rate on units already out there.\n\nThe installed base is the asset. Services is a measure of how much of it is actually being used."
     }
   ]
 }
