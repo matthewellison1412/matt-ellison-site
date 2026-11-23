@@ -288,7 +288,7 @@
   document.getElementById("year").textContent = new Date().getFullYear();
 
   /* ---------- site settings ---------- */
-  getJSON("content/site.json").then(function (s) {
+  getJSON("site.json").then(function (s) {
     if (!s || typeof s !== "object") return;
 
     if (s.colors && typeof s.colors === "object") {
@@ -326,7 +326,7 @@
   }).catch(function () { /* baked-in defaults stay */ });
 
   /* ---------- custom sections ---------- */
-  getJSON("content/sections.json").then(function (data) {
+  getJSON("sections.json").then(function (data) {
     var list = (data && Array.isArray(data.sections)) ? data.sections : [];
     var host = document.getElementById("sections");
     var html = list.filter(function (s) {
@@ -341,7 +341,7 @@
   }).catch(function () { /* no sections file is fine */ });
 
   /* ---------- archive ---------- */
-  getJSON("content/posts.json").then(function (data) {
+  getJSON("posts.json").then(function (data) {
     var posts = (data && Array.isArray(data.posts)) ? data.posts.slice() : [];
     var host = document.getElementById("archive");
 
@@ -398,7 +398,7 @@
     window.netlifyIdentity.on("init", function (user) {
       if (!user) {
         window.netlifyIdentity.on("login", function () {
-          document.location.href = "/admin/";
+          document.location.href = "/admin.html";
         });
       }
     });

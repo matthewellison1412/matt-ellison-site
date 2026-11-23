@@ -264,7 +264,7 @@
   }
   wanted = slugify(wanted);
 
-  getJSON("/content/site.json").then(function (s) {
+  getJSON("/site.json").then(function (s) {
     if (!s) return;
     if (s.colors && typeof s.colors === "object") {
       var map = {
@@ -290,7 +290,7 @@
     document.getElementById("contact").innerHTML = links.join("");
   }).catch(function () {});
 
-  getJSON("/content/posts.json").then(function (data) {
+  getJSON("/posts.json").then(function (data) {
     var posts = (data && Array.isArray(data.posts)) ? data.posts : [];
     var post = null;
     for (var i = 0; i < posts.length; i++) {
