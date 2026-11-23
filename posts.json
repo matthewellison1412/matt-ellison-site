@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "title": "Why breakeven churn moves",
+      "date": "2026-11-23",
+      "category": "Note",
+      "summary": "A subscriber base can shrink while churn barely changes. The threshold that decides it isn't fixed \u2014 and when marketing spend falls, it drops to meet you.",
+      "image": "",
+      "link": "",
+      "slug": "",
+      "body": "Breakeven churn is the rate where new subscribers exactly replace lost ones. It's one division: **monthly gross adds \u00f7 the subscriber base**. Above that line the base shrinks, below it the base grows.\n\nThe mistake is treating it as a fixed target. It isn't. It moves whenever either input moves, and the input that moves fastest is usually gross adds.\n\n## What that looks like\n\nTake a prepaid carrier adding about 215,000 subscribers a month against a 7.2 million base. Breakeven sits at 3.00%, so churn in the high 2s is fine and the base grows.\n\nNow cut marketing spend. Gross adds fall to 187,000 a month, the base is roughly 7.4 million, and breakeven drops to 2.51%.\n\n| Period | Gross adds | Base | Breakeven | Actual churn |\n|---|---|---|---|---|\n| First half | 215K | 7.2M | 3.00% | 2.75% |\n| Second half | 187K | 7.4M | 2.51% | 2.82% |\n\nChurn rose 7 basis points. The threshold fell 48. They crossed, and net adds went negative.\n\n## Why it matters\n\nRead only the churn rate and you'd conclude almost nothing changed \u2014 2.75% to 2.82% is noise. The damage came from the other side of the equation entirely, and the churn number can't show it to you.\n\n> A retention problem and an acquisition problem produce the same headline. They need different fixes.\n\nThe practical version: track the threshold alongside the rate. One number without the other is half the picture."
+    }
+  ]
+}

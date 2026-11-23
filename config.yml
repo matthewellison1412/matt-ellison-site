@@ -1,0 +1,143 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+site_url: https://mattellison.fyi
+display_url: https://mattellison.fyi
+
+collections:
+  - name: "posts"
+    label: "Posts"
+    label_singular: "Post"
+    files:
+      - label: "All posts"
+        name: "posts_list"
+        file: "content/posts.json"
+        description: "Everything in the Writing list on your homepage. Newest date shows first automatically."
+        fields:
+          - label: "Posts"
+            name: "posts"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - label: "Title"
+                name: "title"
+                widget: "string"
+              - label: "Date"
+                name: "date"
+                widget: "datetime"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+                picker_utc: true
+              - label: "Category"
+                name: "category"
+                widget: "string"
+                required: false
+                hint: "Shown next to the date. For example: Case study, Framework, Note."
+              - label: "Summary"
+                name: "summary"
+                widget: "text"
+                required: false
+                hint: "One or two sentences. This is what people read before deciding to click."
+              - label: "Image"
+                name: "image"
+                widget: "image"
+                required: false
+                hint: "Optional thumbnail. A chart or screenshot works better than a stock photo."
+              - label: "Link to somewhere else"
+                name: "link"
+                widget: "string"
+                required: false
+                hint: "Only if this post should point at an existing page or an outside site, like boost-case-study.html or a full URL. Leave blank and write the post below instead, and it gets its own page automatically."
+              - label: "Full post"
+                name: "body"
+                widget: "text"
+                required: false
+                hint: "Write the whole piece here and it publishes at its own address. Blank line between paragraphs. ## for a heading, ### for a smaller one, - for bullets, **bold**, [text](https://example.com) for links, ![](images/chart.png) for an image."
+              - label: "Custom web address"
+                name: "slug"
+                widget: "string"
+                required: false
+                hint: "Optional. By default the address comes from the title. Set this to shorten it — 'boost-churn' gives you /writing/boost-churn."
+
+  - name: "sections"
+    label: "Sections"
+    label_singular: "Section"
+    files:
+      - label: "Homepage sections"
+        name: "sections_list"
+        file: "content/sections.json"
+        description: "Extra blocks that sit between your bio and your writing. Add as many as you want, drag to reorder."
+        fields:
+          - label: "Sections"
+            name: "sections"
+            widget: "list"
+            summary: "{{fields.heading}}"
+            fields:
+              - label: "Heading"
+                name: "heading"
+                widget: "string"
+              - label: "Text"
+                name: "body"
+                widget: "text"
+                hint: "Blank line between paragraphs. ### for a smaller heading, - for bullets, **bold**, [text](https://example.com) for links."
+              - label: "Show this section"
+                name: "show"
+                widget: "boolean"
+                default: true
+                hint: "Turn off to hide it without deleting it."
+
+  - name: "settings"
+    label: "Site"
+    files:
+      - label: "Homepage and contact"
+        name: "site"
+        file: "content/site.json"
+        description: "Your name, the line above it, your bio, and your contact links."
+        fields:
+          - label: "Heading"
+            name: "name"
+            widget: "string"
+            hint: "The big line at the top."
+          - label: "Line above your name"
+            name: "tagline"
+            widget: "string"
+            hint: "A few words on what you work on."
+          - label: "Bio"
+            name: "bio"
+            widget: "text"
+            hint: "Blank line between paragraphs. Links look like [Anthropic](https://www.anthropic.com)."
+          - label: "Heading above your posts"
+            name: "archive_heading"
+            widget: "string"
+            required: false
+          - label: "Email"
+            name: "email"
+            widget: "string"
+            required: false
+          - label: "Phone"
+            name: "phone"
+            widget: "string"
+            required: false
+          - label: "LinkedIn URL"
+            name: "linkedin"
+            widget: "string"
+            required: false
+          - label: "GitHub URL"
+            name: "github"
+            widget: "string"
+            required: false
+          - label: "Colors"
+            name: "colors"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "Gradient top", name: "gradient_top", widget: "color", default: "#A8C8E0" }
+              - { label: "Gradient middle", name: "gradient_mid", widget: "color", default: "#DCEAF5" }
+              - { label: "Gradient bottom", name: "gradient_bottom", widget: "color", default: "#FFFFFF" }
+              - { label: "Text", name: "text", widget: "color", default: "#000000" }
+              - { label: "Dates and small text", name: "muted", widget: "color", default: "#44586A" }
+              - { label: "Links", name: "link", widget: "color", default: "#1B4F72" }

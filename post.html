@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matt Ellison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=Archivo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --grad-top:#A8C8E0;
+    --grad-mid:#DCEAF5;
+    --grad-bottom:#FFFFFF;
+    --ink:#000000;
+    --muted:#44586A;
+    --link:#1B4F72;
+    --rule:rgba(0,0,0,0.16);
+    --measure:34rem;
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(180deg,
+      var(--grad-top) 0%,
+      var(--grad-mid) 38%,
+      var(--grad-bottom) 72%,
+      var(--grad-bottom) 100%);
+    background-attachment:fixed;
+    color:var(--ink);
+    font-family:'Newsreader',Georgia,serif;
+    font-size:19px;
+    line-height:1.65;
+    font-optical-sizing:auto;
+  }
+
+  .wrap{
+    max-width:46rem;
+    margin:0 auto;
+    padding:clamp(2.5rem,7vw,4.5rem) 1.5rem 4rem;
+  }
+
+  a{color:var(--link);text-decoration:none;border-bottom:1px solid rgba(27,79,114,0.32);}
+  a:hover{border-bottom-color:var(--link);}
+  a:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:2px;}
+
+  .back{
+    font-family:'Archivo',system-ui,sans-serif;
+    font-size:0.82rem;
+    display:inline-block;
+    margin-bottom:2.5rem;
+  }
+
+  .post-title{
+    font-weight:400;
+    font-size:clamp(2rem,4.8vw,2.9rem);
+    line-height:1.14;
+    letter-spacing:-0.018em;
+    margin:0 0 0.6rem;
+    max-width:24ch;
+  }
+  .post-meta{
+    font-family:'Archivo',system-ui,sans-serif;
+    font-size:0.82rem;
+    color:var(--muted);
+    margin:0 0 2rem;
+  }
+
+  .post-hero{
+    display:block;
+    width:100%;
+    max-width:var(--measure);
+    height:auto;
+    border:1px solid var(--rule);
+    margin:0 0 2.25rem;
+  }
+
+  .post-body{max-width:var(--measure);}
+  .post-body p{margin:0 0 1.15rem;}
+  .post-body h2{font-size:1.45rem;font-weight:500;margin:2.25rem 0 0.6rem;letter-spacing:-0.01em;}
+  .post-body h3{font-size:1.18rem;font-weight:600;margin:1.9rem 0 0.5rem;}
+  .post-body ul,.post-body ol{margin:0 0 1.15rem;padding-left:1.2rem;}
+  .post-body li{margin-bottom:0.35rem;}
+  .post-body img{max-width:100%;height:auto;border:1px solid var(--rule);margin:1.5rem 0;}
+  .post-body blockquote{
+    margin:1.5rem 0;padding-left:1.1rem;
+    border-left:2px solid var(--rule);color:var(--muted);font-style:italic;
+  }
+  .post-body code{
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+    font-size:0.88em;background:rgba(0,0,0,0.055);padding:0.1em 0.35em;border-radius:3px;
+  }
+  .post-body table{border-collapse:collapse;width:100%;margin:1.5rem 0;font-size:0.95rem;}
+  .post-body th,.post-body td{
+    text-align:left;padding:0.55rem 0.9rem 0.55rem 0;border-bottom:1px solid var(--rule);
+  }
+  .post-body th{font-family:'Archivo',system-ui,sans-serif;font-size:0.78rem;font-weight:600;}
+
+  .notice{max-width:var(--measure);color:var(--muted);font-style:italic;}
+
+  footer{
+    margin-top:3.5rem;padding-top:1.5rem;
+    border-top:1px solid var(--rule);
+    max-width:var(--measure);
+    font-family:'Archivo',system-ui,sans-serif;
+    font-size:0.82rem;color:var(--muted);
+  }
+  footer p{margin:0 0 0.9rem;}
+  footer p:last-child{margin-bottom:0;font-size:0.76rem;}
+  footer a{margin-right:1.1rem;}
+
+  @media (max-width:40rem){ body{font-size:18px;} }
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important;animation:none!important;} }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <a class="back" href="/">Back to home</a>
+
+  <article>
+    <h1 class="post-title" id="title">Loading…</h1>
+    <p class="post-meta" id="meta"></p>
+    <div id="hero"></div>
+    <div class="post-body" id="body"></div>
+  </article>
+
+  <footer>
+    <p id="contact"></p>
+    <p>© <span id="year"></span> Matt Ellison</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var esc = function (s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  };
+
+  var safeUrl = function (u) {
+    var s = String(u == null ? "" : u).trim();
+    if (!s) return "";
+    if (/^(https?:|mailto:)/i.test(s)) return s;
+    if (/^[\w\-./#?=&%]+$/.test(s) && !/^\/\//.test(s)) return s;
+    return "";
+  };
+
+  var slugify = function (s) {
+    return String(s == null ? "" : s)
+      .toLowerCase()
+      .replace(/[‐-―]/g, "-")
+      .replace(/['’]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "")
+      .slice(0, 80);
+  };
+
+  var inline = function (t) {
+    return esc(t)
+      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, function (m, alt, src) {
+        var u = safeUrl(src.replace(/&amp;/g, "&"));
+        return u ? '<img src="' + esc(u) + '" alt="' + alt + '" loading="lazy">' : "";
+      })
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, label, href) {
+        var u = safeUrl(href.replace(/&amp;/g, "&"));
+        if (!u) return label;
+        var ext = /^https?:/i.test(u) ? ' target="_blank" rel="noopener noreferrer"' : "";
+        return '<a href="' + esc(u) + '"' + ext + ">" + label + "</a>";
+      })
+      .replace(/`([^`]+)`/g, "<code>$1</code>")
+      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[\s(])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+  };
+
+  var markdown = function (src) {
+    var blocks = String(src == null ? "" : src).replace(/\r\n/g, "\n").split(/\n{2,}/);
+    var out = "";
+    blocks.forEach(function (b) {
+      b = b.trim();
+      if (!b) return;
+      var lines = b.split("\n");
+
+      if (/^###\s+/.test(b)) { out += "<h3>" + inline(b.replace(/^###\s+/, "")) + "</h3>"; return; }
+      if (/^##\s+/.test(b))  { out += "<h2>" + inline(b.replace(/^##\s+/, "")) + "</h2>"; return; }
+      if (/^#\s+/.test(b))   { out += "<h2>" + inline(b.replace(/^#\s+/, "")) + "</h2>"; return; }
+
+      if (lines.every(function (l) { return /^>\s?/.test(l.trim()); })) {
+        out += "<blockquote>" + inline(lines.map(function (l) {
+          return l.trim().replace(/^>\s?/, "");
+        }).join(" ")) + "</blockquote>";
+        return;
+      }
+
+      // Markdown table: | a | b |  /  |---|---|  /  rows
+      if (lines.length > 1 && /^\|/.test(lines[0].trim()) && /^\|?[\s:|-]+\|/.test(lines[1].trim())) {
+        var cells = function (row) {
+          return row.trim().replace(/^\||\|$/g, "").split("|").map(function (c) { return c.trim(); });
+        };
+        var head = cells(lines[0]);
+        var body = lines.slice(2).filter(function (l) { return l.trim(); });
+        out += "<table><thead><tr>" + head.map(function (h) {
+          return "<th>" + inline(h) + "</th>";
+        }).join("") + "</tr></thead><tbody>" +
+          body.map(function (r) {
+            return "<tr>" + cells(r).map(function (c) {
+              return "<td>" + inline(c) + "</td>";
+            }).join("") + "</tr>";
+          }).join("") + "</tbody></table>";
+        return;
+      }
+
+      if (lines.every(function (l) { return /^[-*]\s+/.test(l.trim()); })) {
+        out += "<ul>" + lines.map(function (l) {
+          return "<li>" + inline(l.trim().replace(/^[-*]\s+/, "")) + "</li>";
+        }).join("") + "</ul>";
+        return;
+      }
+
+      if (lines.every(function (l) { return /^\d+[.)]\s+/.test(l.trim()); })) {
+        out += "<ol>" + lines.map(function (l) {
+          return "<li>" + inline(l.trim().replace(/^\d+[.)]\s+/, "")) + "</li>";
+        }).join("") + "</ol>";
+        return;
+      }
+
+      out += "<p>" + inline(b).replace(/\n/g, "<br>") + "</p>";
+    });
+    return out;
+  };
+
+  var fmtDate = function (d) {
+    if (!d) return "";
+    var parts = String(d).slice(0, 10).split("-");
+    if (parts.length !== 3) return esc(d);
+    var dt = new Date(Date.UTC(+parts[0], +parts[1] - 1, +parts[2]));
+    if (isNaN(dt.getTime())) return esc(d);
+    return dt.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+  };
+
+  var getJSON = function (url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    });
+  };
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Which post? /writing/<slug>, or ?p=<slug>
+  var wanted = "";
+  var m = window.location.pathname.match(/\/writing\/([^/?#]+)/);
+  if (m) {
+    wanted = decodeURIComponent(m[1]);
+  } else {
+    wanted = new URLSearchParams(window.location.search).get("p") || "";
+  }
+  wanted = slugify(wanted);
+
+  getJSON("/content/site.json").then(function (s) {
+    if (!s) return;
+    if (s.colors && typeof s.colors === "object") {
+      var map = {
+        gradient_top: "--grad-top", gradient_mid: "--grad-mid",
+        gradient_bottom: "--grad-bottom", text: "--ink",
+        muted: "--muted", link: "--link"
+      };
+      Object.keys(map).forEach(function (k) {
+        var v = s.colors[k];
+        if (typeof v === "string" && /^#[0-9a-f]{3,8}$/i.test(v.trim())) {
+          document.documentElement.style.setProperty(map[k], v.trim());
+        }
+      });
+    }
+    var links = [];
+    if (s.email) links.push('<a href="mailto:' + esc(s.email) + '">' + esc(s.email) + "</a>");
+    if (s.linkedin && safeUrl(s.linkedin)) {
+      links.push('<a href="' + esc(safeUrl(s.linkedin)) + '" target="_blank" rel="noopener noreferrer">LinkedIn</a>');
+    }
+    if (s.github && safeUrl(s.github)) {
+      links.push('<a href="' + esc(safeUrl(s.github)) + '" target="_blank" rel="noopener noreferrer">GitHub</a>');
+    }
+    document.getElementById("contact").innerHTML = links.join("");
+  }).catch(function () {});
+
+  getJSON("/content/posts.json").then(function (data) {
+    var posts = (data && Array.isArray(data.posts)) ? data.posts : [];
+    var post = null;
+    for (var i = 0; i < posts.length; i++) {
+      var p = posts[i];
+      if (!p || !p.title) continue;
+      if (slugify(p.slug || p.title) === wanted) { post = p; break; }
+    }
+
+    if (!post) {
+      document.getElementById("title").textContent = "Post not found";
+      document.getElementById("body").innerHTML =
+        '<p class="notice">That link doesn\'t match anything published. ' +
+        '<a href="/">Head back to the homepage</a> to see what\'s there.</p>';
+      return;
+    }
+
+    document.title = post.title + " — Matt Ellison";
+    document.getElementById("title").textContent = post.title;
+
+    var meta = [];
+    if (post.category) meta.push(esc(post.category));
+    if (post.date) meta.push(fmtDate(post.date));
+    document.getElementById("meta").innerHTML = meta.join(", ");
+
+    var img = safeUrl(post.image);
+    if (img) {
+      document.getElementById("hero").innerHTML =
+        '<img class="post-hero" src="' + esc(img) + '" alt="">';
+    }
+
+    var bodyHost = document.getElementById("body");
+    if (post.body && String(post.body).trim()) {
+      bodyHost.innerHTML = markdown(post.body);
+    } else if (post.summary) {
+      bodyHost.innerHTML = markdown(post.summary);
+    } else {
+      bodyHost.innerHTML = '<p class="notice">Nothing written here yet.</p>';
+    }
+  }).catch(function () {
+    document.getElementById("title").textContent = "Couldn't load this post";
+    document.getElementById("body").innerHTML =
+      '<p class="notice"><a href="/">Back to the homepage</a></p>';
+  });
+})();
+</script>
+
+</body>
+</html>
